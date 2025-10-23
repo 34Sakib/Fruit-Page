@@ -1,0 +1,67 @@
+/* Sidebar Brand Styling */
+.brand-link {
+    padding: 0.5rem 0.5rem 0.5rem;
+    height: 60px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #4b545c;
+}
+
+.brand-link .brand-logo {
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.brand-link .brand-text {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+/* Ensure proper spacing for sidebar content */
+.sidebar {
+    padding-top: 0.5rem;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+}
+
+/* Adjust nav items */
+.nav-sidebar .nav-item > .nav-link {
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Make sure the active state is visible */
+.nav-sidebar .nav-item > .nav-link.active {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Fix for sidebar scrolling */
+.sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: #4b545c #343a40;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #343a40;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #4b545c;
+    border-radius: 3px;
+}
