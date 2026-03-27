@@ -13,7 +13,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        // Automatically map the Order model to the OrderPolicy
+        'App\Models\Order' => 'App\Policies\OrderPolicy',
     ];
 
     /**

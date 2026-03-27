@@ -1,0 +1,119 @@
+/* Active Filters Styles */
+.active-filters-card {
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.active-filters-card .card-header {
+    padding: 0;
+    border-bottom: none;
+}
+
+.active-filters-header {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: var(--gradient-primary);
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.active-filters-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+
+.active-filters-icon i {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.active-filters-title {
+    margin: 0;
+    color: white;
+    font-weight: 600;
+}
+
+.active-filters-empty {
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.active-filters-empty i {
+    font-size: 2rem;
+    color: #e0e0e0;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.active-filters-empty p {
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.active-filters-empty small {
+    color: #adb5bd;
+    font-size: 0.875rem;
+}
+
+/* Countdown Timer Styles */
+.countdown-timer {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.countdown-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 45px;
+}
+
+.countdown-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #dc3545;
+    line-height: 1;
+    margin-bottom: 2px;
+    font-family: 'Arial', sans-serif;
+}
+
+.countdown-separator {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #dc3545;
+    margin: 0 5px;
+    line-height: 2.2rem;
+}
+
+@media (max-width: 768px) {
+    .countdown-value {
+        font-size: 1.2rem;
+    }
+
+    .countdown-separator {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+    
+    .countdown-item {
+        min-width: 35px;
+    }
+}

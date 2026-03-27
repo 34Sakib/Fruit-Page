@@ -12,9 +12,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -42,18 +39,12 @@ class ProductController extends Controller
         return view('backend.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::where('status', 'active')->pluck('name', 'id');
         return view('backend.products.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -64,16 +55,32 @@ class ProductController extends Controller
             'quantity' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
             'status' => 'required|in:active,inactive',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $data = $request->except('image');
+        $data = $request->except(['image1', 'image2', 'image3']);
         $data['slug'] = Str::slug($request->name);
         $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
-        $data['is_seasonal'] = $request->has('is_seasonal') ? 1 : 0;
+        $data['is_top_product'] = $request->has('is_top_product') ? 1 : 0;
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('products', 'public');
+        $imagePaths = [];
+        
+        if ($request->hasFile('image1')) {
+            $imagePaths[] = $request->file('image1')->store('products', 'public');
+        }
+        
+        if ($request->hasFile('image2')) {
+            $imagePaths[] = $request->file('image2')->store('products', 'public');
+        }
+        
+        if ($request->hasFile('image3')) {
+            $imagePaths[] = $request->file('image3')->store('products', 'public');
+        }
+        
+        if (!empty($imagePaths)) {
+            $data['images'] = $imagePaths;
         }
 
         Product::create($data);
@@ -82,26 +89,17 @@ class ProductController extends Controller
             ->with('success', 'Product created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Product $product)
     {
         return view('backend.products.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
         $categories = Category::where('status', 'active')->pluck('name', 'id');
         return view('backend.products.edit', compact('product', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
@@ -112,20 +110,51 @@ class ProductController extends Controller
             'quantity' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
             'status' => 'required|in:active,inactive',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $data = $request->except('image');
+        $data = $request->except(['image1', 'image2', 'image3']);
         $data['slug'] = Str::slug($request->name);
         $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
-        $data['is_seasonal'] = $request->has('is_seasonal') ? 1 : 0;
+        $data['is_top_product'] = $request->has('is_top_product') ? 1 : 0;
 
-        if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($product->image) {
-                Storage::delete('public/' . $product->image);
+        $imagePaths = [];
+        $hasNewImages = false;
+        
+        if ($request->hasFile('image1')) {
+            $imagePaths[] = $request->file('image1')->store('products', 'public');
+            $hasNewImages = true;
+        } elseif ($product->images && isset($product->images[0])) {
+            $imagePaths[] = $product->images[0];
+        }
+        
+        if ($request->hasFile('image2')) {
+            $imagePaths[] = $request->file('image2')->store('products', 'public');
+            $hasNewImages = true;
+        } elseif ($product->images && isset($product->images[1])) {
+            $imagePaths[] = $product->images[1];
+        }
+        
+        if ($request->hasFile('image3')) {
+            $imagePaths[] = $request->file('image3')->store('products', 'public');
+            $hasNewImages = true;
+        } elseif ($product->images && isset($product->images[2])) {
+            $imagePaths[] = $product->images[2];
+        }
+        
+        if ($hasNewImages) {
+            // Delete old images if exist
+            if ($product->images && is_array($product->images)) {
+                foreach ($product->images as $oldImage) {
+                    Storage::delete('public/' . $oldImage);
+                }
             }
-            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+        
+        if (!empty($imagePaths)) {
+            $data['images'] = $imagePaths;
         }
 
         $product->update($data);
@@ -134,13 +163,12 @@ class ProductController extends Controller
             ->with('success', 'Product updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
-        if ($product->image) {
-            Storage::delete('public/' . $product->image);
+        if ($product->images && is_array($product->images)) {
+            foreach ($product->images as $image) {
+                Storage::delete('public/' . $image);
+            }
         }
         
         $product->delete();

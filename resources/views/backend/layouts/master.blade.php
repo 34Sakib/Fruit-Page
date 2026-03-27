@@ -73,6 +73,8 @@
 <script src="{{ asset('backend/plugins/raphael/raphael.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 
 <!-- AdminLTE App -->
 <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>

@@ -17,8 +17,8 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         // Create admin role and assign permissions
-        $adminRole = Role::create(['name' => 'admin']);
-        $userRole = Role::create(['name' => 'user']);
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
+        $userRole = Role::firstOrCreate(['name' => 'user']);
 
         // Create permissions
         $permissions = [
@@ -30,30 +30,36 @@ class AdminUserSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission]);
         }
 
         // Assign all permissions to admin role
         $adminRole->givePermissionTo(Permission::all());
 
         // Create admin user
-        $admin = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@fruitmart.com',
-            'password' => Hash::make('password'),
-            'is_admin' => true,
-        ]);
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@fruitmart.com'],
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('password'),
+                'is_admin' => true,
+                'role' => 'admin',
+            ]
+        );
 
         // Assign admin role to admin user
         $admin->assignRole('admin');
 
         // Create a regular user
-        $user = User::create([
-            'name' => 'Sakib Al Mahamud',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password'),
-            'is_admin' => false,
-        ]);
+        $user = User::firstOrCreate(
+            ['email' => 'user@example.com'],
+            [
+                'name' => 'Sakib Al Mahamud',
+                'password' => Hash::make('password'),
+                'is_admin' => false,
+                'role' => 'user',
+            ]
+        );
 
         // Assign user role to regular user
         $user->assignRole('user');

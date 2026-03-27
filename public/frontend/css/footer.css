@@ -1,0 +1,53 @@
+.footer-links a:hover {
+    color: #28a745 !important;
+    text-decoration: none;
+}
+
+.hover-white:hover {
+    color: #fff !important;
+}
+
+.payment-icon {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.payment-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.newsletter-form .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.newsletter-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.newsletter-form .form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    color: #fff;
+}
+
+.btn-outline-light:hover {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+@media (max-width: 768px) {
+    .footer-brand {
+        text-align: center;
+    }
+
+    .social-links {
+        text-align: center;
+    }
+
+    .payment-methods {
+        justify-content: center;
+    }
+}

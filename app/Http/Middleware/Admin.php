@@ -22,8 +22,8 @@ class Admin
             return redirect()->route('login');
         }
 
-        // Check if user has admin role using Spatie's role check
-        if (!Auth::user()->hasRole('admin')) {
+        // Check if user has admin role (temporarily using role field instead of Spatie)
+        if (Auth::user()->role !== 'admin') {
             return redirect()->route('home')->with('error', 'You do not have permission to access this area.');
         }
 

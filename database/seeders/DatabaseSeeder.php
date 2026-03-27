@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         // Run the admin user seeder
         $this->call([
             AdminUserSeeder::class,
+            CourierServiceSeeder::class,
         ]);
     }
 }

@@ -4,15 +4,23 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
+                @php
+                    $footerData = \App\Models\Footer::getActive();
+                @endphp
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <i class="fas fa-apple-alt me-2"></i>FruitsPage
+                    <a href="{{ route('home') }}" class="flex items-center">
+                        @if($footerData && $footerData->logo)
+                            <img src="{{ asset('storage/' . $footerData->logo) }}" alt="{{ $footerData->title ?? 'GreenRootMart' }}" class="me-2" style="height: 30px; width: auto;">
+                        @else
+                            <img src="{{ asset('images/greenrootmart-logo.png') }}" alt="GreenRootMart" style="height: 30px; width: auto; margin-right: 8px;">
+                        @endif
+                        <span class="hidden md:inline-block">{{ $footerData->title ?? 'GreenRootMart' }}</span>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
@@ -67,7 +75,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>

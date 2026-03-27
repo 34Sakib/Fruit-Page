@@ -1,0 +1,98 @@
+/* Review Section Styles */
+.rating {
+    color: #ffc107;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.rating-input input[type="radio"] {
+    display: none;
+}
+
+.rating-input label {
+    font-size: 1.5rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-right: 5px;
+}
+
+.rating-input > input:checked ~ label,
+.rating-input > input:checked ~ label ~ label {
+    color: #ffc107;
+}
+
+.rating-input > input:not(:checked) ~ label:hover,
+.rating-input > input:not(:checked) ~ label:hover ~ label {
+    color: #ffd700;
+}
+
+.review-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.review-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+/* Star rating for display */
+.rating-display {
+    color: #ffc107;
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .review-item {
+        padding: 15px;
+    }
+    
+    .rating-input label {
+        font-size: 1.8rem;
+    }
+}
+
+/* Animation for new reviews */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.review-item {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Success message styling */
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+/* Error message styling */
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
