@@ -1,8 +1,7 @@
-# 🍎 Fruitmart - E-commerce Platform
-<img width="1127" height="746" alt="Screenshot 2025-10-23 123013" src="https://github.com/user-attachments/assets/4a7dab6c-cc92-4ec4-87f6-2e903433b6f5" />
+# 🍎 GreenRootMart - E-commerce Platform
+<img width="1888" height="761" alt="image" src="https://github.com/user-attachments/assets/ed39aaf2-8ee0-4a33-97a7-7c0cc3a4bb92" />
 
-
-Fruitmart is a modern, responsive e-commerce platform built with Laravel and Tailwind CSS, designed specifically for managing and selling fresh fruits online. The platform features a robust admin panel for managing products, categories, and users.
+GreenRootMart is a modern, responsive e-commerce platform built with Laravel and Tailwind CSS, designed specifically for managing and selling fresh fruits online. The platform features a robust admin panel for managing products, categories, and users.
 
 ## 🌟 Features
 
